@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800,900&display=swap');
+
+html, body{
+	background-color: #f2f2f2;
+	font-family: 'Nunito Sans', sans-serif !important;
+}
+
+h1{
+	font-weight: 900 !important;
+}
+
+.purple{
+	color: #7413dc;
+}
+
+.background-purple{
+	background-color: #7413dc;
+	color: #fff !important;
+}
+
+.background-purple.btn:hover{
+	background-color: #7642c4;
+	color: #fff;
+}
+
+.background-purple.btn:active{
+	background-color: #61438e;
+	color: #fff;
+}
+
+label{
+	font-weight: 700;
+}
+
+a{
+	font-weight: 700;
+	color: #7413dc;
+}
+
+a:hover{
+	color: #7642c4;
+}
+
+a:active{
+	color: #61438e;
+}
+
+.custom-input-height{
+	line-height: 33px;
+}
+
+/* Board Colours */
+
+.brown{
+	background-color: #990000;
+}
+
+.light-blue{
+	background-color: #00ccff;
+}
+
+.pink{
+	background-color: #ff3399;
+}
+
+.orange{
+	background-color: #ff9900;
+}
+
+.red{
+	background-color: #ff0000;
+}
+
+.yellow{
+	background-color: #ffff00;
+}
+
+.green{
+	background-color: #00ff00;
+}
+
+.blue{
+	background-color: #0000ff
+}
+
+.chance{
+	background-color: #6b6b6b;
+}
+
+.chest{
+	background-color: #899fa3;
+}
+
+.w-33{
+	width: 33%;
+}

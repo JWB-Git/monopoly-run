@@ -1,0 +1,27 @@
+.login-container{
+	background-color: #fff;
+}
+
+.fill{
+	min-height: 35vh !important;
+}
+
+@media (min-width: 576px){
+	.fill{
+		min-height: 100vh !important;
+	}
+}
+
+.login-image, .register-image{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+.login-image{
+	background-image: url(../img/login-image.jpg);
+}
+
+.register-image{
+	background-image: url(../img/register-image.jpg);
+}
