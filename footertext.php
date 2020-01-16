@@ -3,5 +3,5 @@
 	<br>
 	HQ Number: <a href="tel:01913592509">0191 359 2509</a>
 	<br>
-	<span class="font-weight-bold">V1</span>
+	<span class="font-weight-bold">V2 (Alpha)</span>
 </p>
