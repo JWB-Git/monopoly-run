@@ -1,6 +1,9 @@
 <?php
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
+
+//Required API Files
+require_once "../api/upload-data.php";
 ?>
 
 <!DOCTYPE html>
@@ -48,26 +51,19 @@ require_once "validuser.php";
 							</thead>
 							<tbody>
 								<?php
-								$query = "SELECT id, created_at, group_name, location, img_name, checked FROM uploads";
-								$result = mysqli_query($link, $query);
-								if(mysqli_num_rows($result) >= 1){
-									while($row = mysqli_fetch_array($result)){
-										$id = $row['id'];
-										$datetime = $row['created_at'];
-										$group_name = $row['group_name'];
-										$location = $row['location'];
-										$img_name = $row['img_name'];
-										$checked = $row['checked'];
+								//For each upload, add to table
+								foreach(getAllUploads() as $upload){
 								?>
-								<tr class="clickable-row" data-href="check-submission.php?id=<?php echo $id; ?>">
-									<td class="align-middle"><?php echo $datetime; ?></td>
-									<td class="align-middle"><?php echo $group_name; ?></td>
-									<td class="align-middle"><?php echo $location;?></td>
+								<tr class="clickable-row" data-href="check-submission.php?id=<?php echo $upload['id']; ?>">
+									<td class="align-middle"><?php echo $upload['created_at']; ?></td>
+									<td class="align-middle"><?php echo $upload['group_name']; ?></td>
+									<td class="align-middle"><?php echo $upload['location'];?></td>
 									<td>
-										<img src="../uploads/<?php echo $img_name; ?>" alt="<?php echo $img_name; ?>" height="40px">
+										<img src="../uploads/<?php echo $upload['img_name']; ?>" alt="<?php echo $upload['img_name']; ?>" height="40px">
 									</td>
 									<td class="align-middle">
 										<?php
+										$checked = $upload['checked'];
 										$checked_icon="";
 
 										if($checked == 0){
@@ -88,7 +84,7 @@ require_once "validuser.php";
 								</tr>
 
 								<?php
-									}
+								//End of foreach loop
 								}
 								?>
 							</tbody>
