@@ -2,23 +2,16 @@
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
 
+//Required API Files
+require_once "../api/location-data.php";
+
 //Get Data Required For Page Information
 
 //Location Data
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 
-	$query = "SELECT name, colour, value, question, q_bonus FROM spaces WHERE id='".$id."'";
-	$result = mysqli_query($link, $query);
-	if(mysqli_num_rows($result) == 1){
-		while($row = mysqli_fetch_array($result)){
-			$location = $row['name'];
-			$colour = $row['colour'];
-			$value = $row['value'];
-			$question = $row['question'];
-			$q_bonus = $row['q_bonus'];
-		}
-	}
+	$location = getLocation($id);
 }
 else{
 	header("location: index.php?action=error");
@@ -64,26 +57,26 @@ else{
 							</div>
 							<div class="input-group">
 								<div class="input-group-prepend w-25">
-									<span class="input-group-text w-100 <?php echo $colour; ?>" id="location">&nbsp;&nbsp;&nbsp;</span>
+									<span class="input-group-text w-100 <?php echo $location['colour']; ?>" id="location">&nbsp;&nbsp;&nbsp;</span>
 								</div>
-								<input type="text" name="location" class="form-control font-weight-bold" aria-label="Location" aria-described-by="location" value="<?php echo $location; ?>" readonly>
+								<input type="text" name="location" class="form-control font-weight-bold" aria-label="Location" aria-described-by="location" value="<?php echo $location['name']; ?>" readonly>
 							</div>
 							<div class="input-group w-100 float-right mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="value">Q:</span>
 								</div>
-								<textarea type="text" name="value" class="form-control" aria-label="Value" aria-described-by="value" readonly><?php echo $question; ?></textarea>
+								<textarea type="text" name="value" class="form-control" aria-label="Value" aria-described-by="value" readonly><?php echo $location['question']; ?></textarea>
 							</div>
 							<table class="table w-25 mb-3">
 								<thead></thead>
 								<tbody>
 									<tr>
 										<th scope="row" class="w-50">Value (£):</th>
-										<td><?php echo $value; ?></td>
+										<td><?php echo $location['value']; ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Question Bonus (£):</th>
-										<td><?php echo $q_bonus; ?></td>
+										<td><?php echo $location['q_bonus']; ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -114,7 +107,13 @@ else{
 					<div class="card-body">
 						<div class="container-fluid">
 							<?php
-							$query = "SELECT id, created_at, img_name, checked, comment, answer from uploads WHERE group_name = '".$_SESSION['username']."' AND location = '".$location."'";
+							/** I'm going to keep this legacy code because its quite neat at the
+							  * moment, my api dosen't suit this query too well and this is a
+							  * feature which I need to try and possibly improve some time in
+							  * the future. If your reading this future Jack, maybe its time to
+							  * improve this! **/
+
+							$query = "SELECT id, created_at, img_name, checked, comment, answer from uploads WHERE group_name = '".$_SESSION['username']."' AND location = '".$location['name']."'";
 								$result = mysqli_query($link, $query);
 								if(mysqli_num_rows($result) >= 1){
 									while($row = mysqli_fetch_array($result)){

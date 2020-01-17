@@ -22,6 +22,19 @@ function getAllLocations(){
 	return $locations;
 }
 
+function getLocation($id){
+	$query = "SELECT name, colour, value, question, q_bonus FROM spaces WHERE id='".$id."'";
+
+	global $link;
+	$result = mysqli_query($link, $query);
+
+	if(mysqli_num_rows($result) == 1){
+		while($row = mysqli_fetch_array($result)){
+			return $row;
+		}
+	}
+}
+
 function getLocationValues($location){
 	$query = "SELECT value, q_bonus FROM spaces WHERE name='".$location."'";
 
