@@ -2,17 +2,15 @@
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
 
+//Required API Files
+require_once "../api/location-data.php";
+require_once "../api/group-data.php";
+require_once "../api/upload-data.php";
+
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 
-	$query="SELECT group_name, points_deduct FROM groups where id=".$id;
-	$result = mysqli_query($link, $query);
-	if(mysqli_num_rows($result) == 1){
-		while($row = mysqli_fetch_array($result)){
-			$group_name = $row['group_name'];
-			$points_deduct = $row['points_deduct'];
-		}
-	}
+	$group = getGroup($id);
 
 }
 else{
@@ -30,7 +28,7 @@ else{
     <meta name="author" content="Jack Burgess">
 	<meta name="version" content="v1">
     <link rel="icon" href="../img/fleur_favicon.png">
-    <title><?php echo $group_name; ?></title>
+    <title><?php echo $group['group_name']; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -48,7 +46,7 @@ else{
 			<div class="col">
 				<div class="card">
 					<div class="card-header">
-						<?php echo $group_name; ?>
+						<?php echo $group['group_name']; ?>
 					</div>
 					<div class="card-body">
 						<table class="table text-center">
@@ -62,70 +60,24 @@ else{
 							</thead>
 							<tbody>
 								<?php
-								$query = "SELECT name, colour FROM spaces";
-								$result = mysqli_query($link, $query);
-								if(mysqli_num_rows($result) >= 1){
-									while($row = mysqli_fetch_array($result)){
-										$location = $row['name'];
-										$colour = $row['colour'];
+								foreach(getAllLocations() as $location){
 								?>
 								<tr>
-									<td class="<?php echo $colour; ?>"></td>
-									<td class="align-middle"><?php echo $location; ?></td>
+									<td class="<?php echo $location['colour']; ?>"></td>
+									<td class="align-middle"><?php echo $location['name']; ?></td>
 									<td class="align-middle">
 										<!-- Status PHP Goes Here --->
 										<?php
-										$checked_icon="";
-										$question_icon="";
-
-										$query2 = "SELECT checked, question_correct FROM uploads WHERE group_name = '".$group_name."' AND location = '".$location."'";
-										$result2 = mysqli_query($link, $query2);
-										if(mysqli_num_rows($result2) >= 1){
-											while($row2 = mysqli_fetch_array($result2)){
-												$checked = $row2['checked'];
-												$question_correct = $row2['question_correct'];
-
-												if($checked == 0){
-													$checked_icon = "text-warning fas fa-minus-circle";
-													}
-												else if($checked == 1){
-													$checked_icon = "text-success fas fa-check-circle";
-													}
-												else if($checked == 2){
-													$checked_icon = "text-danger fas fa-times-circle";
-													}
-												else{
-													$checked_icon = "text-danger fas fa-exclamation-circle";
-													}
-												}
-
-												if($question_correct == 0 && $checked == 0){
-													$question_icon = "text-warning fas fa-minus-circle";
-												}
-												else if($question_correct == 0){
-													$question_icon = "text-danger fas fa-times-circle";
-												}
-												else if($question_correct == 1){
-													$question_icon = "text-success fas fa-check-circle";
-												}
-												else{
-													$question_icon = "text-danger fas fa-exclamation-circle";
-												}
-											}
-										else{
-											$checked_icon="fas fa-arrow-circle-up";
-											$question_icon="fas fa-arrow-circle-up";
-										}
+										$statuses = getUploadStatuses($group['group_name'], $location['name']);
 										?>
-										<i class="<?php echo $checked_icon; ?>"></i>
+										<i class="<?php echo $statuses['checked_icon']; ?>"></i>
 									</td>
 									<td>
-										<i class="<?php echo $question_icon; ?>"></i>
+										<i class="<?php echo $statuses['question_icon']; ?>"></i>
 									</td>
 								</tr>
 
 								<?php
-									}
 								}
 								?>
 							</tbody>
@@ -145,7 +97,7 @@ else{
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="amount">Deduction Amount:</span>
 								</div>
-								<input type="number" name="points_deduct" class="form-control" aria-label="Amount" aria-described-by="amount" value="<?php echo $points_deduct; ?>">
+								<input type="number" name="points_deduct" class="form-control" aria-label="Amount" aria-described-by="amount" value="<?php echo $group['points_deduct']; ?>">
 							</div>
 							<div class="input-group mb-3">
 								<input name="submit" type="submit" class="btn background-purple btn-block" value="Update">
