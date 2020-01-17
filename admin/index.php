@@ -1,6 +1,10 @@
 <?php
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
+
+//Required API Files;
+require_once "../api/upload-data.php";
+require_once "../api/group-data.php";
 ?>
 
 <!DOCTYPE html>
@@ -47,27 +51,18 @@ require_once "validuser.php";
 							</thead>
 							<tbody>
 								<?php
-								$query = "SELECT id, created_at, group_name, location, img_name FROM uploads WHERE checked='0'";
-								$result = mysqli_query($link, $query);
-								if(mysqli_num_rows($result) >= 1){
-									while($row = mysqli_fetch_array($result)){
-										$id = $row['id'];
-										$datetime = $row['created_at'];
-										$group_name = $row['group_name'];
-										$location = $row['location'];
-										$img_name = $row['img_name'];
+								foreach(getUploadsByCheckedStatus(0) as $upload){
 								?>
-								<tr class="clickable-row" data-href="check-submission.php?id=<?php echo $id; ?>">
-									<td class="align-middle"><?php echo $datetime; ?></td>
-									<td class="align-middle"><?php echo $group_name; ?></td>
-									<td class="align-middle"><?php echo $location;?></td>
+								<tr class="clickable-row" data-href="check-submission.php?id=<?php echo $upload['id']; ?>">
+									<td class="align-middle"><?php echo $upload['created_at']; ?></td>
+									<td class="align-middle"><?php echo $upload['group_name']; ?></td>
+									<td class="align-middle"><?php echo $upload['location'];?></td>
 									<td>
-										<img src="../uploads/<?php echo $img_name; ?>" alt="<?php echo $img_name; ?>" height="40px">
+										<img src="../uploads/<?php echo $upload['img_name']; ?>" alt="<?php echo $upload['img_name']; ?>" height="40px">
 									</td>
 								</tr>
 
 								<?php
-									}
 								}
 								?>
 							</tbody>
@@ -95,45 +90,15 @@ require_once "validuser.php";
 							</thead>
 							<tbody>
 								<?php
-								$query = "SELECT id, group_name, points_deduct FROM groups";
-								$result = mysqli_query($link, $query);
-								if(mysqli_num_rows($result) >= 1){
-									while($row = mysqli_fetch_array($result)){
-										$id = $row['id'];
-										$group_name = $row['group_name'];
-										$points_deduct = $row['points_deduct'];
-										$points = -$points_deduct;
-
-										$query2 = "SELECT location, question_correct FROM uploads WHERE group_name='".$group_name."' AND checked=1";
-										$result2 = mysqli_query($link, $query2);
-										if(mysqli_num_rows($result2) >= 1){
-											while($row2 = mysqli_fetch_array($result2)){
-												$location = $row2['location'];
-												$question_correct = $row2['question_correct'];
-
-												$query3 = "SELECT value, q_bonus FROM spaces WHERE name='".$location."'";
-												$result3 = mysqli_query($link, $query3);
-												if(mysqli_num_rows($result3) == 1){
-													while($row3 = mysqli_fetch_array($result3)){
-														$value = $row3['value'];
-														$q_bonus = $row3['q_bonus'];
-														$points += $value;
-														if($question_correct == 1){
-															$points += $q_bonus;
-														}
-													}
-
-												}
-											}
-										}
+								foreach(getAllGroups() as $group){
 								?>
-								<tr class="clickable-row" data-href="view-group.php?id=<?php echo $id; ?>">
-									<td class="align-middle"><?php echo $group_name; ?></td>
-									<td class="align-middle"><?php echo $points; ?></td>
+								<tr class="clickable-row" data-href="view-group.php?id=<?php echo $group['id']; ?>">
+									<td class="align-middle"><?php echo $group['group_name']; ?></td>
+									<td class="align-middle"><?php echo getGroupPoints($group['id']); ?></td>
 								</tr>
 
 								<?php
-									}
+								//End of foreach loop
 								}
 								?>
 							</tbody>
