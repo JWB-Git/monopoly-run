@@ -15,6 +15,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== "user"){
 }
 
 if($confirmed == 0){
-	header("location:notconfirmed.php");
+	header("location:logout.php");
 }
 ?>
