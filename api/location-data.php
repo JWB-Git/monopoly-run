@@ -6,7 +6,7 @@ function getAllLocations(){
 	$locations = array();
 
 	//Query database for uploads data
-	$query = "SELECT name, colour FROM spaces";
+	$query = "SELECT id, name, colour, value, q_bonus FROM spaces";
 
 	//Execute Query
 	global $link;

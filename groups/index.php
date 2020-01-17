@@ -1,6 +1,10 @@
 <?php
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
+
+//Required API Files
+require_once "../api/location-data.php";
+require_once "../api/upload-data.php";
 ?>
 
 <!DOCTYPE html>
@@ -50,23 +54,15 @@ require_once "validuser.php";
 							</thead>
 							<tbody>
 								<?php
-								$query = "SELECT id, name, colour, value, q_bonus FROM spaces";
-								$result = mysqli_query($link, $query);
-								if(mysqli_num_rows($result) >= 1){
-									while($row = mysqli_fetch_array($result)){
-										$id = $row['id'];
-										$location = $row['name'];
-										$colour = $row['colour'];
-										$value = $row['value'];
-										$q_bonus = $row['q_bonus'];
+								foreach(getAllLocations() as $location){
 								?>
 								<tr>
-									<td class="<?php echo $colour; ?>"></td>
-									<td class="align-middle"><?php echo $location; ?></td>
-									<td class="align-middle">£<?php echo $value;?></td>
-									<td class="align-middle">£<?php echo $q_bonus;?></td>
+									<td class="<?php echo $location['colour']; ?>"></td>
+									<td class="align-middle"><?php echo $location['name']; ?></td>
+									<td class="align-middle">£<?php echo $location['value'];?></td>
+									<td class="align-middle">£<?php echo $location['q_bonus'];?></td>
 									<td class="align-middle">
-										<a href="submit-picture.php?id=<?php echo $id; ?>" class="btn background-purple px-3">Submit&#47;View</a>
+										<a href="submit-picture.php?id=<?php echo $location['id']; ?>" class="btn background-purple px-3">Submit&#47;View</a>
 									</td>
 									<td class="align-middle">
 										<!-- Status PHP Goes Here --->
@@ -74,54 +70,17 @@ require_once "validuser.php";
 										$checked_icon="";
 										$question_icon="";
 
-										$query2 = "SELECT checked, question_correct FROM uploads WHERE group_name = '".$_SESSION['username']."' AND location = '".$location."'";
-										$result2 = mysqli_query($link, $query2);
-										if(mysqli_num_rows($result2) >= 1){
-											while($row2 = mysqli_fetch_array($result2)){
-												$checked = $row2['checked'];
-												$question_correct = $row2['question_correct'];
-
-												if($checked == 0){
-													$checked_icon = "text-warning fas fa-minus-circle";
-													}
-												else if($checked == 1){
-													$checked_icon = "text-success fas fa-check-circle";
-													}
-												else if($checked == 2){
-													$checked_icon = "text-danger fas fa-times-circle";
-													}
-												else{
-													$checked_icon = "text-danger fas fa-exclamation-circle";
-													}
-												}
-
-												if($question_correct == 0 && $checked == 0){
-													$question_icon = "text-warning fas fa-minus-circle";
-												}
-												else if($question_correct == 0){
-													$question_icon = "text-danger fas fa-times-circle";
-												}
-												else if($question_correct == 1){
-													$question_icon = "text-success fas fa-check-circle";
-												}
-												else{
-													$question_icon = "text-danger fas fa-exclamation-circle";
-												}
-											}
-										else{
-											$checked_icon="fas fa-arrow-circle-up";
-											$question_icon="fas fa-arrow-circle-up";
-										}
+										$statuses = getUploadStatuses($_SESSION['username'], $location['name']);
 										?>
-										<i class="<?php echo $checked_icon; ?>"></i>
+										<i class="<?php echo $statuses['checked_icon']; ?>"></i>
 									</td>
 									<td class="align-middle">
-										<i class="<?php echo $question_icon; ?>"></i>
+										<i class="<?php echo $statuses['question_icon']; ?>"></i>
 									</td>
 								</tr>
 
 								<?php
-									}
+								//End of foreach loop
 								}
 								?>
 							</tbody>
