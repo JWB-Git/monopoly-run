@@ -1,3 +1,8 @@
+<?php
+//Require API Files
+require_once "../api/user-data.php";
+?>
+
 <style>
 	.navbar-custom {
 		background-color: #fff;
@@ -41,6 +46,17 @@
 			<li class="nav-item">
 				<a class="nav-link" href="register-group.php"><i class="fas fa-user-plus"></i>&nbsp;Register Team</a>
 	  		</li>
+
+			<?php
+			if(isAdmin($_SESSION['username'])){
+			?>
+			<li class="nav-item">
+				<a class="nav-link" href="settings.php"><i class="fas fa-cog"></i>&nbsp;Settings</a>
+	  		</li>
+			<?php
+			}
+			?>
+
 	  		<li class="nav-item">
 				<a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</a>
 	  		</li>
