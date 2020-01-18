@@ -71,6 +71,10 @@ else{
 								<input class="d-inline w-33 btn btn-danger" type="submit" name="mark-as-wrong" value="Mark as Wrong">
 							</div>
 						</form>
+
+						<i>Use the button below to delete the submission. Only click this if the submission is a duplicate! There is no going back when you click it!</i>
+						<br>
+						<a class="my-2 btn btn-danger text-white" href="delete-submission.php?id=<?php echo $id; ?>">Delete Submission</a>
 					</div>
 				</div>
 			</div>
