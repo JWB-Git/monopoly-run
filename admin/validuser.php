@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../config/config.php";
-$query="SELECT username, confirmed_user FROM users WHERE username='".$_SESSION['username']."'";
+$query="SELECT confirmed_user FROM users WHERE username='".$_SESSION['username']."'";
 $result = mysqli_query($link, $query);
 if(mysqli_num_rows($result) == 1){
 	while($row = mysqli_fetch_array($result)){
