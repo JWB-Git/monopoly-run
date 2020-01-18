@@ -2,27 +2,16 @@
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
 
+//Required API Files
+require_once "../api/upload-data.php";
+require_once "../api/location-data.php";
+
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 
-	$query = "SELECT group_name, location, img_name, answer FROM uploads WHERE id='".$id."'";
-	$result = mysqli_query($link, $query);
-	if(mysqli_num_rows($result) == 1){
-		while($row = mysqli_fetch_array($result)){
-			$location = $row['location'];
-			$group_name = $row['group_name'];
-			$img_name = $row['img_name'];
-			$answer = $row['answer'];
-		}
-	}
+	$upload = getUpload($id);
 
-	$query = "SELECT correct_ans FROM spaces WHERE name='".$location."'";
-	$result = mysqli_query($link, $query);
-	if(mysqli_num_rows($result) == 1){
-		while($row = mysqli_fetch_array($result)){
-			$correct_ans = $row['correct_ans'];
-		}
-	}
+	$ans = getLocationValues($upload['location']);
 }
 else{
 	header("location: index.php?action=error");
@@ -58,12 +47,12 @@ else{
 				<div class="card">
 					<div class="card-header">Submission</div>
 					<div class="card-body">
-						<p><span class="font-weight-bold">Location: </span><?php echo $location; ?></p>
-						<p><span class="font-weight-bold">Group Name: </span><?php echo $group_name; ?></p>
+						<p><span class="font-weight-bold">Location: </span><?php echo $upload['location']; ?></p>
+						<p><span class="font-weight-bold">Group Name: </span><?php echo $upload['group_name']; ?></p>
 						<p class="font-weight-bold">Picture:</p>
-						<img src="../uploads/<?php echo $img_name; ?>" width="100%" class="mb-3">
-						<p><span class="font-weight-bold">Answer: </span><?php echo $answer; ?></p>
-						<p><span class="font-weight-bold">Correct Answer: </span><?php echo $correct_ans; ?></p>
+						<img src="../uploads/<?php echo $upload['img_name']; ?>" width="100%" class="mb-3">
+						<p><span class="font-weight-bold">Answer: </span><?php echo $upload['answer']; ?></p>
+						<p><span class="font-weight-bold">Correct Answer: </span><?php echo $ans['correct_ans']; ?></p>
 						<hr>
 
 						<form action="update-submission.php" method="post">
