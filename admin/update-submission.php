@@ -3,7 +3,7 @@ require_once "validuser.php";
 
 if(isset($_POST["mark-as-correct"])) {
 	$id = $_POST['id'];
-	$comment = htmlspecialchars($_POST['comment']);
+	$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES);
 
 	$query = "UPDATE uploads SET checked = 1, question_correct = 1, comment = '".$comment."' WHERE id = '".$id."'";
 	$result = mysqli_query($link, $query);
@@ -17,7 +17,7 @@ if(isset($_POST["mark-as-correct"])) {
 }
 else if(isset($_POST["mark-as-semi-correct"])) {
 	$id = $_POST['id'];
-	$comment = htmlspecialchars($_POST['comment']);
+	$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES);
 
 	$query = "UPDATE uploads SET checked = 1, comment = '".$comment."' WHERE id = '".$id."'";
 	$result = mysqli_query($link, $query);
@@ -31,7 +31,7 @@ else if(isset($_POST["mark-as-semi-correct"])) {
 }
 else if(isset($_POST["mark-as-wrong"])) {
 	$id = $_POST['id'];
-	$comment = htmlspecialchars($_POST['comment']);
+	$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES);
 
 	$query = "UPDATE uploads SET checked = 2, comment = '".$comment."' WHERE id = '".$id."'";
 	$result = mysqli_query($link, $query);
