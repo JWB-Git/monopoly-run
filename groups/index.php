@@ -90,6 +90,18 @@ require_once "../api/upload-data.php";
 				</div>
 			</div>
 		</div>
+		<div class="row mt-3">
+			<div class="col">
+				<div class="card">
+					<div class="card-header">Progress Map</div>
+					<div class="card-body">
+						<div class="embed-responsive embed-responsive-21by9">
+							<iframe src="../map/map.php?group_name=<?php echo $_SESSION['username'] ?>"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<footer class="bg-white p-3 mt-4 text-center">
