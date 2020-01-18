@@ -56,6 +56,27 @@ function getUpload($id){
 	}
 }
 
+function getGroupCheckedUploads($group_name){
+	//Create array to store uploads data
+	$uploads = array();
+
+	//Query database for uploads data
+	$query = "SELECT * FROM uploads WHERE group_name='".$group_name."' AND checked = 1";
+
+	//Execute Query
+	global $link;
+	$result = mysqli_query($link, $query);
+
+	//If 1 or more uploads return, run fetch loop
+	if(mysqli_num_rows($result) >= 1){
+		while($row = mysqli_fetch_array($result)){
+			//Push $row to uploads array
+			$uploads[] = $row;
+		}
+	}
+	return $uploads;
+}
+
 function getUploadStatuses($group_name, $location){
 	$query = "SELECT checked, question_correct FROM uploads WHERE group_name = '".$group_name."' AND location = '".$location."'";
 

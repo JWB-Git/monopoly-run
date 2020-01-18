@@ -36,7 +36,7 @@ function getLocation($id){
 }
 
 function getLocationValues($location){
-	$query = "SELECT value, q_bonus, correct_ans FROM spaces WHERE name='".$location."'";
+	$query = "SELECT value, q_bonus, correct_ans, lat, lng FROM spaces WHERE name='".$location."'";
 
 	//Execute Query
 	global $link;

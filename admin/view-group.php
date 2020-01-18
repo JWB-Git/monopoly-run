@@ -107,6 +107,19 @@ else{
 				</div>
 			</div>
 		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				<div class="card">
+					<div class="card-header">Map</div>
+					<div class="card-body">
+						<div class="embed-responsive embed-responsive-21by9">
+							<iframe src="../map/map.php?group_name=<?php echo $group['group_name'] ?>"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<footer class="bg-white p-3 mt-4 text-center">
