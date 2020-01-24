@@ -24,7 +24,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-custom bg-white">
   	<a class="navbar-brand" href="index.php">
-		<img class="mr-2" src="../img/Full_Logo_Updated.svg" alt="logo" height="30px">
+		<img class="mr-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="logo" height="30px">
 	</a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 	<i class="fas fa-bars purple"></i>
@@ -41,6 +41,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="https://www.google.com/maps/d/u/2/viewer?mid=1JsHVAxGlWk0o3a8oIxvCRB_QSXfW_DOK&ll=55.00095151645751%2C-1.5209032999999863&z=12" target="_blank"><i class="far fa-map"></i>&nbsp;Location Map</a>
 			</li>
+<!--
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bus"></i> Bus Replacement Information</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown">
@@ -48,6 +49,7 @@
 					<a class="dropdown-item" href="https://www.nexus.org.uk/sites/default/files/23_24_nov_rgt-_hth_bus_0.pdf" target="_blank"><i class="fas fa-thumbs-up"></i> Bus Stop Locations</a>
 				</div>
 	  		</li>
+-->
 			<li class="nav-item">
 				<a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</a>
 	  		</li>

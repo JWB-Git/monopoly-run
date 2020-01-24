@@ -122,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<div class="row">
 			<div class="col-sm register-image fill"></div>
 			<div class="col-sm fill border rounded-lg shadow text-center login-container">
-				<img class="mt-4 mb-2" src="../img/Full_Logo_Updated.svg" alt="NUSSAGG Logo" width=200px;>
+				<img class="mt-4 mb-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="Fleur de Lis" width=200px;>
 
 				<h1 class="m-3 purple">Register</h1>
 

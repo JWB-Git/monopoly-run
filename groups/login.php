@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					}
 				}
 				?>
-				<img class="mt-4 mb-2" src="../img/Full_Logo_Updated.svg" alt="NUSSAGG Logo" width=200px;>
+				<img class="mt-4 mb-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="Fleur De Lis" width=200px;>
 
 				<h1 class="m-3 purple">Group Login</h1>
 

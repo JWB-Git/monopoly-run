@@ -29,7 +29,7 @@ require_once "../api/user-data.php";
 
 <nav class="navbar navbar-expand-sm navbar-custom bg-white">
   	<a class="navbar-brand" href="index.php">
-		<img class="mr-2" src="../img/Full_Logo_Updated.svg" alt="logo" height="30px">
+		<img class="mr-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="logo" height="30px">
 	</a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 	<i class="fas fa-bars purple"></i>
