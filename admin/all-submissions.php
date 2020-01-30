@@ -64,13 +64,17 @@ require_once "../api/upload-data.php";
 									<td class="align-middle">
 										<?php
 										$checked = $upload['checked'];
+										$question = $upload['question_correct'];
 										$checked_icon="";
 
 										if($checked == 0){
 											$checked_icon = "text-warning fas fa-minus-circle";
 											}
-										else if($checked == 1){
+										else if($checked == 1 && $question == 1){
 											$checked_icon = "text-success fas fa-check-circle";
+											}
+										else if($checked == 1 && $question == 0){
+											$checked_icon = "text-warning fas fa-check-circle";
 											}
 										else if($checked == 2){
 											$checked_icon = "text-danger fas fa-times-circle";

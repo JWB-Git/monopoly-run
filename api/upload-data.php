@@ -6,7 +6,7 @@ function getAllUploads(){
 	$uploads = array();
 
 	//Query database for uploads data
-	$query = "SELECT id, created_at, group_name, location, img_name, checked FROM uploads";
+	$query = "SELECT id, created_at, group_name, location, img_name, checked, question_correct FROM uploads";
 
 	//Execute Query
 	global $link;
