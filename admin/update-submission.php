@@ -19,7 +19,7 @@ else if(isset($_POST["mark-as-semi-correct"])) {
 	$id = $_POST['id'];
 	$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES);
 
-	$query = "UPDATE uploads SET checked = 1, comment = '".$comment."' WHERE id = '".$id."'";
+	$query = "UPDATE uploads SET checked = 1, question_correct = 0, comment = '".$comment."' WHERE id = '".$id."'";
 	$result = mysqli_query($link, $query);
 
 	if($result){
@@ -33,7 +33,7 @@ else if(isset($_POST["mark-as-wrong"])) {
 	$id = $_POST['id'];
 	$comment = htmlspecialchars($_POST['comment'], ENT_QUOTES);
 
-	$query = "UPDATE uploads SET checked = 2, comment = '".$comment."' WHERE id = '".$id."'";
+	$query = "UPDATE uploads SET checked = 2, question_correct = 0, comment = '".$comment."' WHERE id = '".$id."'";
 	$result = mysqli_query($link, $query);
 
 	if($result){
