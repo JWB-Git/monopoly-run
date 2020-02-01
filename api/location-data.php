@@ -51,6 +51,11 @@ function getLocationValues($location){
 	}
 }
 
+
+/** LOCATION COLOUR TABLE
+  * Technically not in the location data, however there is only 1 function required and related to locations so can be written here
+  * If Location Colour gets expanded, move into own seperate api file
+  **/
 function getLocationColours(){
 	$location_colours = array();
 

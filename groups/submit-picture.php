@@ -1,3 +1,5 @@
+<!-- This is the frontend page for submitting a picture. For the backend, see upload-picture.php -->
+
 <?php
 //Check if user is logged on and confirmed user
 require_once "validuser.php";

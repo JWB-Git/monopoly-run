@@ -35,7 +35,7 @@ function getGroup($id){
 	//Check for 1 result
 	if(mysqli_num_rows($result) == 1){
 		while($row = mysqli_fetch_array($result)){
-			//Return Group Name
+			//Return Group
 			return $row;
 		}
 	}
@@ -47,6 +47,8 @@ function getGroupPoints($id){
 
 	$points = -$group['points_deduct'];
 
+
+	//Required to count amount of each set a group has gone to.
 	$set_count = array(
 		"brown" => 0,
 		"light-blue" => 0,

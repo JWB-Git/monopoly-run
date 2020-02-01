@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800,900&display=swap');
+/** CUSTOM CSS FOR VARIOUS PAGES **/
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800,900&display=swap'); /** Scout Font **/
 
 html, body{
 	background-color: #f2f2f2;
