@@ -46,6 +46,27 @@ global $settings;
 	<div id="mapid"></div>
 
 	<script>
+		//Markers
+		var blueIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
+		var redIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
+
+		//Set initial icon to red icon
+		var icon = redIcon;
+
 		var map = L.map('mapid').setView([<?php echo $settings['centre_lat'] ?>, <?php echo $settings['centre_lng'] ?>], <?php echo $settings['zoom'] ?>);
 
 		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -70,7 +91,10 @@ global $settings;
 			lines.push([lat, lng]);
 
 			//Add marker at said lat lng
-			L.marker([lat, lng]).addTo(map);
+			L.marker([lat, lng], {icon: icon}).addTo(map);
+
+			//Set icon to blue
+			icon = blueIcon;
 
 		<?php
 		//End of foreach loop

@@ -113,6 +113,7 @@ else{
 				<div class="card">
 					<div class="card-header">Map</div>
 					<div class="card-body">
+						<p class="font-italic">Red marker indicates the first location the team went to.</p>
 						<div class="embed-responsive embed-responsive-21by9">
 							<iframe src="../map/map.php?group_name=<?php echo $group['group_name'] ?>"></iframe>
 						</div>

@@ -95,6 +95,7 @@ require_once "../api/upload-data.php";
 				<div class="card">
 					<div class="card-header">Progress Map</div>
 					<div class="card-body">
+						<p class="font-italic">Red marker indicates the first location you went to.</p>
 						<div class="embed-responsive embed-responsive-21by9">
 							<iframe src="../map/map.php?group_name=<?php echo $_SESSION['username'] ?>"></iframe>
 						</div>
