@@ -36,7 +36,7 @@ function getLocation($id){
 }
 
 function getLocationValues($location){
-	$query = "SELECT value, q_bonus, correct_ans, lat, lng FROM spaces WHERE name='".$location."'";
+	$query = "SELECT colour, value, q_bonus, correct_ans, lat, lng FROM spaces WHERE name='".$location."'";
 
 	//Execute Query
 	global $link;
@@ -49,5 +49,25 @@ function getLocationValues($location){
 			return $row;
 		}
 	}
+}
+
+function getLocationColours(){
+	$location_colours = array();
+
+	$query = "SELECT * FROM space_colours";
+
+	//Execute Query
+	global $link;
+	$result = mysqli_query($link, $query);
+
+	//Check for 1 result
+	if(mysqli_num_rows($result) >= 1){
+		while($row = mysqli_fetch_array($result)){
+			//Return Location Value Data
+			$location_colours[] = $row;
+		}
+	}
+
+	return $location_colours;
 }
 ?>

@@ -47,6 +47,19 @@ function getGroupPoints($id){
 
 	$points = -$group['points_deduct'];
 
+	$set_count = array(
+		"brown" => 0,
+		"light-blue" => 0,
+		"pink" => 0,
+		"orange" => 0,
+		"red" => 0,
+		"yellow" => 0,
+		"green" => 0,
+		"blue" => 0,
+		"chance" => 0,
+		"chest" => 0
+	);
+
 	//Get all locations team has visited and been checked at
 	$locationQuery = "SELECT location, question_correct FROM uploads WHERE group_name='".$group['group_name']."' AND checked=1";
 
@@ -63,6 +76,9 @@ function getGroupPoints($id){
 			//Add to team total
 			$points += $values['value'];
 
+			//Add colour to set count
+			$set_count[$values['colour']] += 1;
+
 			//Add question bonus if questionis correct
 			if($location['question_correct'] == 1){
 				$points += $values['q_bonus'];
@@ -70,7 +86,20 @@ function getGroupPoints($id){
 		}
 	}
 
+	$points += getSetBonusPoints($set_count);
+
 	//Return Points
 	return $points;
+}
+
+function getSetBonusPoints($set_count){
+	$bonus_points = 0;
+
+	foreach(getLocationColours() as $colour){
+		if($colour['set_spaces'] == $set_count[$colour['colour']]){
+			$bonus_points += $colour['set_bonus'];
+		}
+	}
+	return $bonus_points;
 }
 ?>
