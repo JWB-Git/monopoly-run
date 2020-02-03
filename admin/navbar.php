@@ -46,6 +46,9 @@ require_once "../api/user-data.php";
 			<li class="nav-item">
 				<a class="nav-link" href="register-group.php"><i class="fas fa-user-plus"></i>&nbsp;Register Team</a>
 	  		</li>
+            <li class="nav-item">
+                <a class="nav-link" href="check-in-out.php"><i class="fas fa-calendar"></i>&nbsp;Check Team In/Out</a>
+            </li>
 
 			<?php
 			if(isAdmin($_SESSION['username'])){

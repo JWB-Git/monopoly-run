@@ -26,7 +26,23 @@ function getAllGroups(){
 }
 
 function getGroup($id){
-	$query = "SELECT group_name, points_deduct FROM groups WHERE id='".$id."'";
+	$query = "SELECT group_name FROM groups WHERE id='".$id."'";
+
+	//Execute Query
+	global $link;
+	$result = mysqli_query($link, $query);
+
+	//Check for 1 result
+	if(mysqli_num_rows($result) == 1){
+		while($row = mysqli_fetch_array($result)){
+			//Return Group
+			return $row;
+		}
+	}
+}
+
+function checkInOut($group){
+	$query = "SELECT check_in, check_out FROM groups WHERE group_name='".$group."'";
 
 	//Execute Query
 	global $link;
@@ -45,7 +61,9 @@ function getGroupPoints($id){
 	//Get Group Info
 	$group = getGroup($id);
 
-	$points = -$group['points_deduct'];
+	$points_deduct = getPointsDeduct($group['group_name']);
+
+	$points = -$points_deduct; //Start counting points on amount of points deducted
 
 
 	//Required to count amount of each set a group has gone to.
@@ -92,6 +110,26 @@ function getGroupPoints($id){
 
 	//Return Points
 	return $points;
+}
+
+function getPointsDeduct($group){
+	/** Important Constants **/
+	$TIMESTAMP_DIVISOR = 60; //Divide timestamp by 60 to get minutes
+	$GAME_LENGTH = 360; //Number of minutes teams have in the game
+	$POINTS_MINUTE = 10; //Number of points lost for every minute the teams are late back
+
+	$check_in_out = checkInOut($group);
+
+	if($check_in_out['check_out'] == "0000-00-00 00:00:00"){
+		return 0;
+	}
+	else{
+		$total_time = intval((strtotime($check_in_out['check_out']) - strtotime($check_in_out['check_in'])) / $TIMESTAMP_DIVISOR);
+
+		$mins_late = ($total_time - $GAME_LENGTH > 0) ? $total_time - $GAME_LENGTH : 0; //Checks if team is actually late. If not, set late to 0 so that no points are added or deducted.
+
+		return $mins_late * $POINTS_MINUTE;
+	}
 }
 
 function getSetBonusPoints($set_count){

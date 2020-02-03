@@ -89,28 +89,6 @@ else{
 		<div class="row mt-3">
 			<div class="col">
 				<div class="card">
-					<div class="card-header">Deduct Points</div>
-					<div class="card-body">
-						<i>Enter positive numbers only!</i>
-						<form action="deduct-points.php?id=<?php echo $id; ?>" method="post" class="mt-2">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="amount">Deduction Amount:</span>
-								</div>
-								<input type="number" name="points_deduct" class="form-control" aria-label="Amount" aria-described-by="amount" value="<?php echo $group['points_deduct']; ?>">
-							</div>
-							<div class="input-group mb-3">
-								<input name="submit" type="submit" class="btn background-purple btn-block" value="Update">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row mt-3">
-			<div class="col">
-				<div class="card">
 					<div class="card-header">Map</div>
 					<div class="card-body">
 						<p class="font-italic">Red marker indicates the first location the team went to.</p>
