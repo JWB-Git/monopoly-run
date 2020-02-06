@@ -44,7 +44,7 @@ function getUploadsByCheckedStatus($checkedStatus){
 }
 
 function getUpload($id){
-	$query = "SELECT group_name, location, img_name, answer FROM uploads WHERE id='".$id."'";
+	$query = "SELECT group_name, location, img_name, answer, comment FROM uploads WHERE id='".$id."'";
 
 	global $link;
 	$result = mysqli_query($link, $query);

@@ -63,7 +63,7 @@ else{
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="comment">Comment: </span>
 								</div>
-								<input type="text" name="comment" class="form-control" aria-label="Comment" aria-described-by="comment">
+								<input type="text" name="comment" class="form-control" aria-label="Comment" aria-described-by="comment" value="<?php echo $upload['comment']; ?>">
 							</div>
 							<div class="input-group mb-3">
 								<input class="d-inline w-33 btn btn-success" type="submit" name="mark-as-correct" value="Mark as Correct (Question Correct)">
