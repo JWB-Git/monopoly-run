@@ -2,6 +2,9 @@
 //Check if user is logged on and confirmed user
 require_once "../config/config.php";
 
+//Requires options code
+require_once "../config/options.php";
+
 //Check Group ID has been set
 if(isset($_GET['group_name'])){
 	$group_name = $_GET['group_name'];
@@ -13,10 +16,6 @@ else{
 //Require API Files
 require_once "../api/upload-data.php";
 require_once "../api/location-data.php";
-
-//Settings File
-require_once "map-settings.php";
-global $settings;
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +66,7 @@ global $settings;
 		//Set initial icon to red icon
 		var icon = redIcon;
 
-		var map = L.map('mapid').setView([<?php echo $settings['centre_lat'] ?>, <?php echo $settings['centre_lng'] ?>], <?php echo $settings['zoom'] ?>);
+		var map = L.map('mapid').setView([<?php echo $options['map_settings']['centre_lat'] ?>, <?php echo $options['map_settings']['centre_lng'] ?>], <?php echo $options['map_settings']['zoom'] ?>);
 
 		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
