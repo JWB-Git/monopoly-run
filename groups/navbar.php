@@ -35,13 +35,16 @@
 	  		<li class="nav-item">
 				<a class="nav-link" href="index.php"><i class="fas fa-home"></i>&nbsp;Home</a>
 	  		</li>
+
+<!-- COMMENT THESE OUT OR CHANGE IF REQUIRED -->
 			<li class="nav-item">
 				<a class="nav-link" href="../img/tw-metro-map.jpg" target="_blank"><i class="far fa-map"></i>&nbsp;Metro Map</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="https://www.google.com/maps/d/u/2/viewer?mid=1JsHVAxGlWk0o3a8oIxvCRB_QSXfW_DOK&ll=55.00095151645751%2C-1.5209032999999863&z=12" target="_blank"><i class="far fa-map"></i>&nbsp;Location Map</a>
 			</li>
-<!--
+
+<!-- BUS REPLACEMENT TIMETABLE LINK (REQUIRED FOR NEWCASTLE 2019)
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bus"></i> Bus Replacement Information</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown">
@@ -50,6 +53,7 @@
 				</div>
 	  		</li>
 -->
+
 			<li class="nav-item">
 				<a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</a>
 	  		</li>

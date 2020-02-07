@@ -1,7 +1,11 @@
+<?php
+require_once "config/options.php";
+?>
+
 <p>
-	Tyne &amp; Wear Monopoly Run - Organised by NUSSAGG &amp; City of Newcastle District Scouts
+	<?php echo $options['name']; ?>
 	<br>
-	HQ Number: <a href="tel:"></a>
+	HQ Number: <a href="tel:<?php echo $options['hq_number']; ?>"><?php echo $options['hq_number']; ?></a>
 	<br>
 	<span class="font-weight-bold">V2 (Alpha)</span>
 </p>
