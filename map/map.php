@@ -62,6 +62,15 @@ require_once "../api/location-data.php";
 		  popupAnchor: [1, -34],
 		  shadowSize: [41, 41]
 		});
+		var greenIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
+
 
 		//Set initial icon to red icon
 		var icon = redIcon;
@@ -78,9 +87,16 @@ require_once "../api/location-data.php";
 		var lines=[];
 
 		<?php
-		foreach(getGroupCheckedUploads($group_name) as $upload){
+		$uploads = getGroupCheckedUploads($group_name);
+		for($i = 0; $i < count($uploads); $i++){
+			if($i+1 == count($uploads)){
+				?>
+				icon = greenIcon;
+				<?php
+			}
+
 			//Get Lat Lng of Upload Location
-			$location = getLocationValues($upload['location']);
+			$location = getLocationValues($uploads[$i]['location']);
 		?>
 
 			var lat = <?php echo $location['lat'] ?>;
@@ -96,7 +112,7 @@ require_once "../api/location-data.php";
 			icon = blueIcon;
 
 		<?php
-		//End of foreach loop
+		//End of for loop
 		}
 		?>
 
