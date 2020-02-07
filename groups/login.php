@@ -154,6 +154,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</form>
 				<br>
 				<?php include "../footertext.php" ?>
+				<p>
+					<a href="../admin/login.php">Go to admin login</a>
+				</p>
 			</div>
 		</div>
 	</div>

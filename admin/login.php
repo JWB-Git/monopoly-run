@@ -136,7 +136,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				?>
 				<img class="mt-4 mb-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="Fleur de Lis" width=200px;>
 
-				<h1 class="m-3 purple">Login</h1>
+				<h1 class="m-3 purple">Admin Login</h1>
 
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 					<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : '' ?>">
@@ -154,6 +154,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</form>
 				<br>
 				<?php include "../footertext.php" ?>
+				<p>
+					<a href="../groups/login.php">Go to groups login</a>
+				</p>
 			</div>
 		</div>
 	</div>
