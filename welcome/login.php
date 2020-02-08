@@ -63,6 +63,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						$_SESSION["loggedin"] = "section";
 						$_SESSION["id"] = $id;
 						$_SESSION["username"] = $username;
+						$_SESSION["osm_secret"] = "";
+						$_SESSION["osm_user_id"] = "";
 
 						//Redirect to index
 						header("location: index.php");

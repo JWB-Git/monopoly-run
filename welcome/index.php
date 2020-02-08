@@ -1,6 +1,39 @@
 <?php
 //Check if user is logged on and confirmed user
 require_once "validuser.php";
+
+//Required API's
+require_once "../api/osm-functions.php";
+require_once "../api/section-data.php";
+require_once "../api/encryption.php";
+
+$alert = "";
+
+if(osmSecretSet() == 0){
+	$section = getSection($_SESSION['username']);
+
+	if($section['osm_email'] == null || $section['osm_password'] == null){
+		$alert =
+			"<div class='alert alert-danger w-100' role='alert'>
+  					Your OSM Details haven't been set. Please visit the User Settings page to set your details.
+			</div>";
+	}
+	else{
+		$auth = authorise();
+
+		if(array_key_exists('secret', $auth) && array_key_exists('userid', $auth)){
+			$_SESSION['osm_secret'] = $auth['secret'];
+			$_SESSION['osm_user_id'] = $auth['userid'];
+		}
+
+		else{
+			$alert =
+				"<div class='alert alert-danger w-100' role='alert'>
+  					".$auth->error.". Please check your OSM User Settings
+				</div>";
+		}
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +59,11 @@ require_once "validuser.php";
 <body>
 	<?php include_once "navbar.php" ?>
 
+	<main class="container-fluid">
+		<div class="row">
+			<?php echo $alert; ?>
+		</div>
+	</main>
 
 	<footer class="bg-white p-3 mt-4 text-center">
 		<?php include "../footertext.php" ?>

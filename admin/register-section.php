@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	//Check input errors before inserting
 	if(empty($username_err) && empty($password_err) & empty($confirm_password_err)){
 		//Prepare insert statement
-		$sql = "INSERT INTO groups (group_name, password) VALUES (?, ?)";
+		$sql = "INSERT INTO sections (section_name, password) VALUES (?, ?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
 			//Bind variables to statement
@@ -83,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			//Attempt to execute statement
 			if(mysqli_stmt_execute($stmt)){
 				//Redirect to login page
-				header("location: index.php?action=group-registered");
+				header("location: index.php?action=section-registered");
 			}
 			else{
 				echo "Oops, something went wrong! Please try again later.";
@@ -124,12 +124,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			<div class="col-sm fill border rounded-lg shadow text-center login-container">
 				<img class="mt-4 mb-2" src="../img/Scouts_Logo_Stack_Purple.png" alt="Fleur de Lis" width=200px;>
 
-				<h1 class="m-3 purple">Team Register</h1>
+				<h1 class="m-3 purple">Section Register</h1>
 
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 					<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
 						<label for="username">Team Name:</label>
-						<input name="username" type="text" class="form-control w-75 mx-auto" placeholder="Group Name" value="<?php echo $username; ?>">
+						<input name="username" type="text" class="form-control w-75 mx-auto" placeholder="Section Name" value="<?php echo $username; ?>">
 						<span class="help-block"><?php echo $username_err; ?></span>
 					</div>
 					<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : '' ?>">

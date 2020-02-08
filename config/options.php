@@ -4,7 +4,7 @@ $options = array(
 	"hq_number" => "000000000",
 
 	//If OSM Integration is active (1), display extra pages.
-	"osm_integration" => 0,
+	"osm_integration" => 1,
 
 	"map_settings" => array(
 		//Centre of Map Latitude and Longitude

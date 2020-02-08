@@ -1,6 +1,9 @@
 <?php
 //Require API Files
 require_once "../api/user-data.php";
+
+//Require options file
+require_once "../config/options.php";
 ?>
 
 <style>
@@ -43,9 +46,25 @@ require_once "../api/user-data.php";
 			<li class="nav-item">
 				<a class="nav-link" href="all-submissions.php"><i class="fas fa-list"></i>&nbsp;All Submissions</a>
 	  		</li>
+
+			<?php
+			if($options["osm_integration"] == 0){
+			?>
 			<li class="nav-item">
 				<a class="nav-link" href="register-group.php"><i class="fas fa-user-plus"></i>&nbsp;Register Team</a>
 	  		</li>
+			<?php
+			}
+			else{
+			?>
+			<li class="nav-item">
+				<a class="nav-link" href="register-section.php"><i class="fas fa-user-plus"></i>&nbsp;Register Section</a>
+	  		</li>
+			<?php
+			}
+			?>
+
+
             <li class="nav-item">
                 <a class="nav-link" href="check-in-out.php"><i class="fas fa-calendar"></i>&nbsp;Check Team In/Out</a>
             </li>
