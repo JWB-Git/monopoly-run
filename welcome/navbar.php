@@ -37,6 +37,24 @@
 	  		</li>
 
 			<li class="nav-item">
+				<a class="nav-link" href="team-allocation.php"><i class="fas fa-users"></i>&nbsp;Team Allocation</a>
+	  		</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="videos.php"><i class="fas fa-video"></i>&nbsp;Videos</a>
+	  		</li>
+
+            <li class="nav-item dropdown">
+              	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                	<i class="fas fa-campground"></i>&nbsp;OSM Configuration
+              	</a>
+              	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="osm-user-settings.php">User Settings</a>
+					<a class="dropdown-item" href="osm-set-ids.php">Set ID's</a>
+              	</div>
+            </li>
+
+			<li class="nav-item">
 				<a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</a>
 	  		</li>
 		</ul>
