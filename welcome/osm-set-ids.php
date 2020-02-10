@@ -128,7 +128,7 @@ if($section['term_id'] == null){
                         </form>
 					</div>
 					<div role="tabpanel" class="tab-pane p-3" id="event">
-						<table id="term-table" class="table table-hover text-center">
+						<table id="event-table" class="table table-hover text-center">
 							<thead>
 								<tr>
 									<th scope="col">ID</th>

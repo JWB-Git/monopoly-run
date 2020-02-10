@@ -11,11 +11,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	//Validate User
 	if(empty(trim($_POST["username"]))){
-		$username_err = "Please enter a Group Name";
+		$username_err = "Please enter a Section Name";
 	}
 	else{
 		//Prepare SQL statement
-		$sql = "SELECT id FROM groups WHERE group_name = ?";
+		$sql = "SELECT id FROM sections WHERE section_name = ?";
 
 		if($stmt = mysqli_prepare($link, $sql)){
 			//Bind variables to prepared statement
@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				mysqli_stmt_store_result($stmt);
 
 				if(mysqli_stmt_num_rows($stmt) == 1){
-					$username_err = "This Group Name is already taken.";
+					$username_err = "This Section Name is already taken.";
 				}
 				else{
 					$username = trim($_POST["username"]);
@@ -67,13 +67,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 
 	//Check input errors before inserting
-	if(empty($username_err) && empty($password_err) & empty($confirm_password_err)){
+	if(empty($username_err) && empty($password_err) & empty($confirm_password_err) && isset($_POST['teams'])){
 		//Prepare insert statement
-		$sql = "INSERT INTO sections (section_name, password) VALUES (?, ?)";
+		$sql = "INSERT INTO sections (section_name, password, no_teams) VALUES (?, ?, ?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
 			//Bind variables to statement
-			mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+			mysqli_stmt_bind_param($stmt, "ssi", $param_username, $param_password, $_POST['teams']);
 
 			//Set parameters
 			$param_username = $username;
@@ -140,6 +140,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
 						<label for="password">Confirm Password:</label>
 						<input name="confirm-password" type="password" class="form-control w-75 mx-auto" placeholder="Password">
+						<span class="help-block"><?php echo $confirm_password_err; ?></span>
+					</div>
+
+					<div class="form-group">
+						<label for="teams">Number of Teams:</label>
+						<input name="teams" type="number" class="form-control w-75 mx-auto" placeholder="Number of Teams" required="required">
 						<span class="help-block"><?php echo $confirm_password_err; ?></span>
 					</div>
 
