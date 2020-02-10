@@ -1,6 +1,8 @@
 <?php
 require_once "../config/config.php";
 
+include "../config/options.php";
+
 //Other required apis
 require_once "location-data.php";
 
@@ -114,9 +116,10 @@ function getGroupPoints($id){
 
 function getPointsDeduct($group){
 	/** Important Constants **/
-	$TIMESTAMP_DIVISOR = 60; //Divide timestamp by 60 to get minutes
-	$GAME_LENGTH = 360; //Number of minutes teams have in the game
-	$POINTS_MINUTE = 10; //Number of points lost for every minute the teams are late back
+	global $options;
+	$TIMESTAMP_DIVISOR = $options['time_settings']['timestamp_divisor']; //Divide timestamp by 60 to get minutes
+	$GAME_LENGTH = $options['time_settings']['game_length']; //Number of minutes teams have in the game
+	$POINTS_MINUTE = $options['time_settings']['points_minute']; //Number of points lost for every minute the teams are late back
 
 	$check_in_out = checkInOut($group);
 
