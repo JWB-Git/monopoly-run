@@ -16,6 +16,7 @@ require_once "../api/group-data.php";
     <meta name="description" content="Monopoly Run - Admin Home">
     <meta name="author" content="Jack Burgess">
 	<meta name="version" content="v1">
+	<meta http-equiv="refresh" content="60">
     <link rel="icon" href="../img/fleur_favicon.png">
     <title>Home</title>
 
@@ -86,6 +87,7 @@ require_once "../api/group-data.php";
 								<tr>
 									<th scope="col">Team Name</th>
 									<th scope="col">Points</th>
+									<th scope="col">Time Remaining</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -95,6 +97,7 @@ require_once "../api/group-data.php";
 								<tr class="clickable-row" data-href="view-group.php?id=<?php echo $group['id']; ?>">
 									<td class="align-middle"><?php echo $group['group_name']; ?></td>
 									<td class="align-middle"><?php echo getGroupPoints($group['id']); ?></td>
+									<td class="align-middle"><?php echo timeRemaining($group['id']); ?></td>
 								</tr>
 
 								<?php

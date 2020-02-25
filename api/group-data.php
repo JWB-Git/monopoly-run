@@ -28,7 +28,7 @@ function getAllGroups(){
 }
 
 function getGroup($id){
-	$query = "SELECT group_name FROM groups WHERE id='".$id."'";
+	$query = "SELECT * FROM groups WHERE id='".$id."'";
 
 	//Execute Query
 	global $link;
@@ -144,5 +144,39 @@ function getSetBonusPoints($set_count){
 		}
 	}
 	return $bonus_points;
+}
+
+function timeRemaining($id){
+	$group = getGroup($id);
+
+	/** Important Constants **/
+	global $options;
+	$TIMESTAMP_DIVISOR = $options['time_settings']['timestamp_divisor']; //Divide timestamp by 60 to get minutes
+	$GAME_LENGTH = $options['time_settings']['game_length']; //Number of minutes teams have in the game
+	$POINTS_MINUTE = $options['time_settings']['points_minute']; //Number of points lost for every minute the teams are late back
+
+	$start_time = $group['check_in'];
+	$current_time = date('Y-m-d H:i:s');
+	$time_taken = intval(strtotime($current_time) - strtotime($start_time));
+
+	$time_remaining = ($GAME_LENGTH - $time_taken/$TIMESTAMP_DIVISOR);
+
+	if($group['check_in'] == "0000-00-00 00:00:00"){
+		return 'Team Not Out';
+	}
+	if($group['check_out'] != "0000-00-00 00:00:00"){
+		return 'Team Back In';
+	}
+	if($time_remaining < 0){
+		return 'Team Late!';
+	}
+	else{
+		$hours = intval($time_remaining / 60);
+		$minutes = intval($time_remaining % 60);
+		if($minutes < 10){
+			$minutes = '0'.$minutes;
+		}
+		return $hours.":".$minutes;
+	}
 }
 ?>
